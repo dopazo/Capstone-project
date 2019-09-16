@@ -18,13 +18,13 @@ Guia sencilla git:
 http://rogerdudler.github.io/git-guide/index.es.html
 
 ### Para crear repo (lo creé yo)
-
+```
 git init
 git add *
 git commit -m "descripción"
 git remote add origin https://github.com/dopazo/Capstone-project
 git push -u origin master
-
+```
 ### Para empezar
 ```
 git init
