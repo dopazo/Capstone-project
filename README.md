@@ -3,10 +3,8 @@ Aplicación de escritorio que se usará para implementar un modelo de deserción
 ## Pasos a realizar inicialmente
 - instalar nodejs (lo cual instala también npm)
 - instalar electron dentro de una carpeta a su elección (si a todo en la instalación), esto creará dentro la carpeta node_modules
-- copiar el index.js que les enviaré dentro de la carpeta que crearon ustedes <- Supongo de aqui en adelante es pulled de github
-- crear carpeta app, todo lo que hagamos por la aplicación se deberá hacer dentro de esta
-- copiar el index.html ahí dentro
-- bootstrap, etc, se instala en la carpeta raiz que creamos <- Intenta a ver si te sale sin hacer esto, aunque en vola si tengas que instalarlo
+- bootstrap, etc, se instala en la carpeta raiz que creamos <- Intenten a ver si sale sin hacer esto
+- hacer git pull dentro de la carpeta que eligieron ustedes
 
 **Para iniciar la aplicación de escritorio mientras la desarrollamos: `npm run start`**
 
