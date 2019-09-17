@@ -1,34 +1,39 @@
-$skin: #4db6ac;
+/* $skin: #4db6ac; */
 
-html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to top, #4F6072, #8699AA);
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* .body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to top, #4F6072, #8699AA);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 
-//upload component
+/* //upload component */
 .upload {
   position: relative;
-  width: 400px;
-  min-height: 445px;
+  width: auto;
+  min-height: auto;
   box-sizing: border-box;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(black, .2);
   padding-bottom: 20px;
-  background: #fff;
-  animation: fadeup .5s .5s ease both;
+  background: lightcyan;
+  animation: fadeup .25s .25s ease both;
   transform: translateY(20px);
   opacity: 0;
-  .upload-files {
-    header {
+}
+.upload-files {
+    header{
       background: $skin;
 				  border-top-left-radius: 5px;
 					 border-top-right-radius: 5px;
