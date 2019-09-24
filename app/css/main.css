@@ -24,6 +24,7 @@ body {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 0;
 }
 .upload {
   position: relative;
@@ -48,7 +49,16 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 .upload-files {
+  padding: 5px 25px 5px 5px;
+  vertical-align: middle;
+  font-size: 13px;
+  border: 1px solid Silver;
+  border-radius: 8px;
+  background: white;
+}
+/* .upload-files {
     header {
       background: $skin;
 				  border-top-left-radius: 5px;
@@ -307,7 +317,7 @@ body {
         }
       }
     }
-  }
+  } */
   @keyframes fadeup {
     to {
       transform: translateY(0);
