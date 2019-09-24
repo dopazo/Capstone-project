@@ -20,21 +20,23 @@
 </head>
 <body>   
     <div class="upload">
-    <header>
-    <img class="logo "src="imgs/uai.png">
-    <h2>Sistema de Alerta Temprana</h2>
-    <br>
-    </header>
-    <div class="upload-files">
-      <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
-      <p class="pointer-none"><b>Arrastra el archivo aquí</b><br /> o examina para subir archivos:</p>
+      <header>
+      <img class="logo "src="imgs/uai.png">
+      <h2>Sistema de Alerta Temprana</h2>
+      <br>
+      </header>
+      <div class="upload-files">
+          <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+          <p class="pointer-none"><b>Arrastra el archivo aquí</b><br /> o examina para subir archivos:</p>
+        
+          <span><AR><b>ARCHIVO</b></AR></span>
+          </br>
+          <input class="input" type="file" id="fileinput"/>
+      </div>
+      <button onclick="showTable()">Esto debería hacer que aparezca la tabla</button>
+      <table id="example" class="csvTable" cellspacing="0" width="100%"></table>
+    </div>
     
-      <span><AR><b>ARCHIVOS</b></AR></span>
-      </br>
-      <input class="input" type="file" multiple="multiple" id="csvUploader" />
-    </div>
-    </div>
-          
     <!-- <footer>
       <div class="divider"></div>
         <span><AR><b>FILES</b></AR></span>
@@ -45,7 +47,6 @@
     
     <button class="importar">UPDATE FILES</button>
     </footer> -->
-
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->

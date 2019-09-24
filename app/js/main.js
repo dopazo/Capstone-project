@@ -1,6 +1,35 @@
 //DOM
 const $ = document.querySelector.bind(document);
+var table = $('#example').DataTable({
+    columns: [{
+        "title": "Nombre",
+        "data": "Nombre"
+    }, {
+        "title": "Apellido",
+        "data": "Apellido"
+    }, {
+        "title": "Edad",
+        "data": "Edad"
+    }]
+}
+);
 
+$("#fileinput").on("change", function(evt) {
+    var f = evt.target.files[0];
+    if (f) {
+        var r = new FileReader();
+        r.onload = function(e) {
+            table.rows.add($.csv.toObjects(e.target.result)).draw();
+        }
+		r.readAsText(f);
+    } else {
+        alert("Failed to load file");
+    }
+});
+
+function showTable() {
+	document.getElementsByClassName("csvTable").style.display = "table";
+};
 //APP
 let App = {};
 App.init = (function() {
@@ -74,4 +103,6 @@ App.init = (function() {
 	// input change
 	$("input[type=file]").addEventListener("change", handleFileSelect);
 })();
+
+
 
