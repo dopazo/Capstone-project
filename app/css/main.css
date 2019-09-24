@@ -29,7 +29,7 @@ body {
 .upload {
   position: relative;
   width: auto;
-  height: auto;
+  height: 375px;
   box-sizing: border-box;
   border: 1px solid #9cbcf7;
   border-radius: 12px;
