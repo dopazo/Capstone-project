@@ -19,6 +19,12 @@ body {
 } */
 
 /* //upload component */
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .upload {
   position: relative;
   width: auto;
