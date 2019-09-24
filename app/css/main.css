@@ -4,8 +4,8 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to top, #4F6072, #8699AA);
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  background: linear-gradient(to top, white, #4571ca);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,22 +21,32 @@ body {
 /* //upload component */
 
 .logo {
-  display: block;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
 }
 .upload {
   position: relative;
   width: auto;
-  min-height: auto;
+  height: auto;
   box-sizing: border-box;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(black, .2);
+  border: 1px solid #9cbcf7;
+  border-radius: 12px;
+  box-shadow: #666 0px 5px 10px;
   padding-bottom: 20px;
-  background: lightcyan;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  background: linear-gradient(white, #eff3f6);
   animation: fadeup .25s .25s ease both;
   transform: translateY(20px);
   opacity: 0;
+  text-align: center;
+}
+.input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .upload-files {
     header {
