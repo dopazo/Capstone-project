@@ -1,7 +1,7 @@
 /* $skin: #4db6ac; */
 
 body {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -33,7 +33,7 @@ body {
   opacity: 0;
 }
 .upload-files {
-    header{
+    header {
       background: $skin;
 				  border-top-left-radius: 5px;
 					 border-top-right-radius: 5px;
