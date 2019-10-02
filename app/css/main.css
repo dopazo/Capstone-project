@@ -346,3 +346,26 @@ body {
   }
 }
 
+/* Clase genérica para ocultar elementos. No es muy buena práctica tener esto
+porque lo mejor sería ir sacando los elementos del dom e ir agregándolos con Javascript
+pero por ahora por simplificar las cosas mejor tenerlo así */
+.hide {
+  visibility: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
