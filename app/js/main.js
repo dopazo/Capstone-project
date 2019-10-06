@@ -83,7 +83,6 @@ const handleCsvUpload = (event) => {
 const createTable = (data) => {
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
-	tableBody.setAttribute('id', 'dataTable');
 	var counter = 0;
 	data.forEach(function(rowData) {
 		const row = document.createElement('tr');
