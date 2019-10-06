@@ -4,10 +4,6 @@
  * con el id al input), hacer un par de validaciones y después en caso que salga todo bien
  * llama a la función para parsear la data y mostrar el contenido.
  * 
- * Se hizo de esta forma para no tener problemas de scope al intentar acceder a `this.files`
- * y todo eso. Hay mejores prácticas para hacer todo esto, pero al menos así queda más
- * legible el código y se evitan algunos errores.
- * 
  * @param {any} event: evento emitido al exitir un cambio en el input de archivos
  */
 const handleCsvUpload = (event) => {
@@ -22,14 +18,21 @@ const handleCsvUpload = (event) => {
 	// Por ahora solamente se está verificando el tipo del archivo (que sea CSV), pero se pueden
 	// agregar validaciones como el peso, el formato del archivo, etc. Sería cosa de ir agregando
 	// las condiciones o manejándolas en de formas independientes
-	const { type } = files[0]
+
+	// La validación de tipo de archivo (csv) no funciona correctamente en Windows
+	// Al parecer el OS no logra matchear el tipo de archivo con algún nativo que
+	// sea 'text/csv'
+	// Al ocupar mac o Linux no hay problema. Simplemente descomentar esta sección
+	// del código
+	
+	/* const { type } = files[0]
 	if (type !== 'text/csv') {
 		$("#error-alert").toggleClass("collapse");
 		$("#loading").toggleClass("hide");
 		previewDiv.classList.add("hide");
 		setTimeout(() => $("#error-alert").toggleClass("collapse"), 2000)
 		return null
-	}
+	} */
 	// En caso que haya salido todo bien y el archivo haya pasado las validaciones de arriba, se
 	// llega hasta acá donde lo que 
 	const reader = new FileReader();
