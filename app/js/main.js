@@ -84,6 +84,7 @@ const createTable = (data) => {
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
 	tableBody.setAttribute('id', 'dataTable');
+	var counter = 0;
 	data.forEach(function(rowData) {
 		const row = document.createElement('tr');
 		rowData.forEach(function(cellData) {
@@ -92,9 +93,15 @@ const createTable = (data) => {
 			row.appendChild(cell);
 		});
 		const cell = document.createElement('td');
-		cell.appendChild(document.createTextNode('hola'));
+		if(counter < 1){
+			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
+		}
+		else{
+			cell.appendChild(document.createTextNode('Valor'));
+		}
 		row.appendChild(cell);
 		tableBody.appendChild(row);
+		counter++;
 	});
 	
 	table.appendChild(tableBody);
