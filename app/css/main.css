@@ -1,33 +1,68 @@
-$skin: #4db6ac;
+/* $skin: #4db6ac; */
 
-html,
 body {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  background: linear-gradient(to top, white, #4a7adb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-body {
+/* .body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to top, #4F6072, #8699AA);
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-//upload component
+/* //upload component */
+
+.logo {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 0;
+}
 .upload {
   position: relative;
-  width: 400px;
-  min-height: 445px;
+  width: auto;
+  height: 375px;
   box-sizing: border-box;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(black, .2);
+  border: 1px solid #9cbcf7;
+  border-radius: 12px;
+  box-shadow: #666 0px 5px 10px;
   padding-bottom: 20px;
-  background: #fff;
-  animation: fadeup .5s .5s ease both;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  background: linear-gradient(white, #eff3f6);
+  animation: fadeup .25s .25s ease both;
   transform: translateY(20px);
   opacity: 0;
-  .upload-files {
+  text-align: center;
+}
+.input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upload-files {
+  padding: 5px 25px 5px 5px;
+  vertical-align: middle;
+  font-size: 13px;
+  border: 1px solid Silver;
+  border-radius: 8px;
+  background: white;
+}
+
+.csvTable {
+  display: none;
+}
+/* .upload-files {
     header {
       background: $skin;
 				  border-top-left-radius: 5px;
@@ -286,7 +321,7 @@ body {
         }
       }
     }
-  }
+  } */
   @keyframes fadeup {
     to {
       transform: translateY(0);
@@ -305,8 +340,32 @@ body {
     }
   }
   @media (max-width: 400px){
+    to{
     width: 100%;
     height: 100%;
   }
 }
 
+/* Clase genérica para ocultar elementos. No es muy buena práctica tener esto
+porque lo mejor sería ir sacando los elementos del dom e ir agregándolos con Javascript
+pero por ahora por simplificar las cosas mejor tenerlo así */
+.hide {
+  visibility: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}

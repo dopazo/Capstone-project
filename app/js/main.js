@@ -1,77 +1,106 @@
-//DOM
-const $ = document.querySelector.bind(document);
+/**
+ * Función para manejar algún cambio en el input de archivos. Recibe el evento del
+ * cambio del input, pero lo que realmente hace es sacar los archivos del input (accediendo 
+ * con el id al input), hacer un par de validaciones y después en caso que salga todo bien
+ * llama a la función para parsear la data y mostrar el contenido.
+ * 
+ * Se hizo de esta forma para no tener problemas de scope al intentar acceder a `this.files`
+ * y todo eso. Hay mejores prácticas para hacer todo esto, pero al menos así queda más
+ * legible el código y se evitan algunos errores.
+ * 
+ * @param {any} event: evento emitido al exitir un cambio en el input de archivos
+ */
+const handleCsvUpload = (event) => {
+	$("#loading").toggleClass("hide");
+	const previewDiv = document.getElementById("csv-preview");
+  previewDiv.innerHTML = '';
 
-//APP
-let App = {};
-App.init = (function() {
-	//Init
-	function handleFileSelect(evt) {
-		const files = evt.target.files; // FileList object
-
-		//files template
-		let template = `${Object.keys(files)
-			.map(file => `<div class="file file--${file}">
-     <div class="name"><span>${files[file].name}</span></div>
-     <div class="progress active"></div>
-     <div class="done">
-	<a href="" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000">
-		<g><path id="path" d="M500,10C229.4,10,10,229.4,10,500c0,270.6,219.4,490,490,490c270.6,0,490-219.4,490-490C990,229.4,770.6,10,500,10z M500,967.7C241.7,967.7,32.3,758.3,32.3,500C32.3,241.7,241.7,32.3,500,32.3c258.3,0,467.7,209.4,467.7,467.7C967.7,758.3,758.3,967.7,500,967.7z M748.4,325L448,623.1L301.6,477.9c-4.4-4.3-11.4-4.3-15.8,0c-4.4,4.3-4.4,11.3,0,15.6l151.2,150c0.5,1.3,1.4,2.6,2.5,3.7c4.4,4.3,11.4,4.3,15.8,0l308.9-306.5c4.4-4.3,4.4-11.3,0-15.6C759.8,320.7,752.7,320.7,748.4,325z"</g>
-		</svg>
-						</a>
-     </div>
-    </div>`)
-			.join("")}`;
-
-		$("#drop").classList.add("hidden");
-		$("footer").classList.add("hasFiles");
-		$(".importar").classList.add("active");
-		setTimeout(() => {
-			$(".list-files").innerHTML = template;
-		}, 1000);
-
-		Object.keys(files).forEach(file => {
-			let load = 2000 + (file * 2000); // fake load
-			setTimeout(() => {
-				$(`.file--${file}`).querySelector(".progress").classList.remove("active");
-				$(`.file--${file}`).querySelector(".done").classList.add("anim");
-			}, load);
-		});
+	const { files }  = document.getElementById('csvUploader');
+	if (!files || !files.length) return null
+	// Acá se ven todas las validaciones del archivo y se muestra el mensaje de error en caso
+	// que exista algún error.
+	// Por ahora solamente se está verificando el tipo del archivo (que sea CSV), pero se pueden
+	// agregar validaciones como el peso, el formato del archivo, etc. Sería cosa de ir agregando
+	// las condiciones o manejándolas en de formas independientes
+	const { type } = files[0]
+	if (type !== 'text/csv') {
+		$("#error-alert").toggleClass("collapse");
+		$("#loading").toggleClass("hide");
+		previewDiv.classList.add("hide");
+		setTimeout(() => $("#error-alert").toggleClass("collapse"), 2000)
+		return null
 	}
-
-	// trigger input
-	$("#triggerFile").addEventListener("click", evt => {
-		evt.preventDefault();
-		$("input[type=file]").click();
+	// En caso que haya salido todo bien y el archivo haya pasado las validaciones de arriba, se
+	// llega hasta acá donde lo que 
+	const reader = new FileReader();
+	reader.addEventListener('load', function (e) {
+			const rawData = e.target.result; 
+			const parsedData = parseCsvContent(rawData)
+			const tableElement = createTable(parsedData)
+			previewDiv.appendChild(tableElement)
 	});
 
-	// drop events
-	$("#drop").ondragleave = evt => {
-		$("#drop").classList.remove("active");
-		evt.preventDefault();
-	};
-	$("#drop").ondragover = $("#drop").ondragenter = evt => {
-		$("#drop").classList.add("active");
-		evt.preventDefault();
-	};
-	$("#drop").ondrop = evt => {
-		$("input[type=file]").files = evt.dataTransfer.files;
-		$("footer").classList.add("hasFiles");
-		$("#drop").classList.remove("active");
-		evt.preventDefault();
-	};
+	reader.readAsBinaryString(files[0]);
 
-	//upload more
-	$(".importar").addEventListener("click", () => {
-		$(".list-files").innerHTML = "";
-		$("footer").classList.remove("hasFiles");
-		$(".importar").classList.remove("active");
-		setTimeout(() => {
-			$("#drop").classList.remove("hidden");
-		}, 500);
+	$("#loading").toggleClass("hide");
+  previewDiv.classList.remove("hide");
+}
+
+/**
+ * Función para crear elemento del DOM de una <table> con los respectivos `tr`y `td`.
+ * Lo que hace es recorrer la matriz (arreglo de arreglos) con filas y las columnas de
+ * cada fila.
+ * 
+ * Al ir recorriendo las filas va creando los tr y después recorre cada fila para crear las
+ * celdas y creando los td con el valor de esa celda. Retorna después un elemento del
+ * tipo <table> que se tiene que insertar donde se requiera
+ * 
+ * @param {any} data: arreglo de objetos con la data de la tabla a crear
+ * @return {element} elemento del DOM a insertar (<table> ya creado)
+ */
+const createTable = (data) => {
+	const table = document.createElement('table');
+	const tableBody = document.createElement('tbody');
+
+	data.forEach(function(rowData) {
+		const row = document.createElement('tr');
+		rowData.forEach(function(cellData) {
+			const cell = document.createElement('td');
+			cell.appendChild(document.createTextNode(cellData));
+			row.appendChild(cell);
+		});
+	
+		tableBody.appendChild(row);
 	});
+			
+	table.appendChild(tableBody);
+	return table;
+}
 
-	// input change
-	$("input[type=file]").addEventListener("change", handleFileSelect);
-})();
+/**
+ * Función para parsear el contenido del CSV. Lo que hace es recibir un un string con
+ * la data cruda, convertirla a una matriz de filaz y columnas (arreglo de arreglos)
+ * 
+ * @param {any} rawData: data "cruda" a parsear
+ * @return {array} arreglo con la data parseada
+ */
+const parseCsvContent = (rawData) => {
+	const newLinebrk = rawData.split("\n");
+	return newLinebrk.map(row => row.split(','))
+}
 
+/**
+ * Función main que contiene toda la lógica inicial de la aplicación. hace ciertos seteos
+ * y por ahora lo que hace es bindear el input de subir archivos a una función para manejar
+ * los cambios.
+ * 
+ * En caso de que se quieran manejar más inputs, agregar más eventos y todo 
+ * 
+ * @return {void}
+ */
+const main = () => {
+	const input = document.getElementById('csvUploader');
+	input.addEventListener('change', handleCsvUpload, false)
+}
+
+main();
