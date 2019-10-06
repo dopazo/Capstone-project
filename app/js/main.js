@@ -1,12 +1,28 @@
+/* 
+	Ignorar de la linea 5 a la 18. Fueron los primeros intentos
+	de agregar una columna a la tabla. Finalmente agregué "hola"
+	a cada fila en la linea 94-96. Aunque aun hay fallas
+*/
+
+/* function createCell(cell, text) {
+    var txt = document.createTextNode(text); // create text node
+    cell.appendChild(text);                   // append DIV to the table cell
+}
+
+function appendColumn(tbl) {
+    // var tbl = document.getElementById('dataTable'), // table reference
+    i;
+    // open loop for each row and append cell
+    for (i = 0; i < tbl.rows.length; i++) {
+        createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i);
+    }
+} */
+
 /**
  * Función para manejar algún cambio en el input de archivos. Recibe el evento del
  * cambio del input, pero lo que realmente hace es sacar los archivos del input (accediendo 
  * con el id al input), hacer un par de validaciones y después en caso que salga todo bien
  * llama a la función para parsear la data y mostrar el contenido.
- * 
- * Se hizo de esta forma para no tener problemas de scope al intentar acceder a `this.files`
- * y todo eso. Hay mejores prácticas para hacer todo esto, pero al menos así queda más
- * legible el código y se evitan algunos errores.
  * 
  * @param {any} event: evento emitido al exitir un cambio en el input de archivos
  */
@@ -22,14 +38,21 @@ const handleCsvUpload = (event) => {
 	// Por ahora solamente se está verificando el tipo del archivo (que sea CSV), pero se pueden
 	// agregar validaciones como el peso, el formato del archivo, etc. Sería cosa de ir agregando
 	// las condiciones o manejándolas en de formas independientes
-	const { type } = files[0]
+
+	// La validación de tipo de archivo (csv) no funciona correctamente en Windows
+	// Al parecer el OS no logra matchear el tipo de archivo con algún nativo que
+	// sea 'text/csv'
+	// Al ocupar mac o Linux no hay problema. Simplemente descomentar esta sección
+	// del código
+
+	/* const { type } = files[0]
 	if (type !== 'text/csv') {
 		$("#error-alert").toggleClass("collapse");
 		$("#loading").toggleClass("hide");
 		previewDiv.classList.add("hide");
 		setTimeout(() => $("#error-alert").toggleClass("collapse"), 2000)
 		return null
-	}
+	} */
 	// En caso que haya salido todo bien y el archivo haya pasado las validaciones de arriba, se
 	// llega hasta acá donde lo que 
 	const reader = new FileReader();
@@ -41,7 +64,6 @@ const handleCsvUpload = (event) => {
 	});
 
 	reader.readAsBinaryString(files[0]);
-
 	$("#loading").toggleClass("hide");
   previewDiv.classList.remove("hide");
 }
@@ -61,7 +83,7 @@ const handleCsvUpload = (event) => {
 const createTable = (data) => {
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
-
+	var counter = 0;
 	data.forEach(function(rowData) {
 		const row = document.createElement('tr');
 		rowData.forEach(function(cellData) {
@@ -69,10 +91,48 @@ const createTable = (data) => {
 			cell.appendChild(document.createTextNode(cellData));
 			row.appendChild(cell);
 		});
-	
-		tableBody.appendChild(row);
-	});
+		//coeficientes modelo regresión logística
+		var coefs = [
+                -0.0025, //Mat              row[3]
+                0.0045,  //Leng             row[4]
+                -0.003,  //Rank             row[5]
+                -0.0025];//NEM(coef PsuOpc) row[6]
+        
+		const cell = document.createElement('td');
+		if(counter < 1){
+			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
+		}
+		else{
+		    //Calculo modelo regresión logistica: suma producto, exponencial y round
+		    var sumProd = 0;
+            for(var i=0; i< coefs.length; i++) {
+                //TODO: seleccionar columnas por el nombre de la columna
+                //TODO: Modificar nombres de columnas y sus valores de ser necesario
+                sumProd += coefs[i]*row.cells.item(i+3).innerText//*row[i+3];
+            }
+		    percent = (Math.exp(sumProd)/(1+Math.exp(sumProd)))*100
+		    percent = Math.round(percent * 100) / 100
+		    
+		    //creación nueva columna, con porcentaje de deserción
+			const progressBar = document.createElement('div');
+			const progressBarValue = document.createElement('div');
+			const progressBarFill = document.createElement('div');
+			progressBar.setAttribute('class', 'progress-bar');
+			progressBarValue.setAttribute('class', 'progress-bar-value');
+			progressBarFill.setAttribute('class', 'progress-bar-fill');
 			
+			progressBarValue.appendChild(document.createTextNode(percent + '%'));
+			
+			progressBar.appendChild(progressBarValue);
+			progressBar.appendChild(progressBarFill);
+
+			cell.appendChild(progressBar);
+		}
+		row.appendChild(cell);
+		tableBody.appendChild(row);
+		counter++;
+	});
+	
 	table.appendChild(tableBody);
 	return table;
 }
