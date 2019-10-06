@@ -1,22 +1,31 @@
-/* 
-	Ignorar de la linea 5 a la 18. Fueron los primeros intentos
-	de agregar una columna a la tabla. Finalmente agregué "hola"
-	a cada fila en la linea 94-96. Aunque aun hay fallas
-*/
+class ProgressBar {
+	constructor (element, initialValue=0){
+		this.valueElem = element.querySelector('.progress-bar-value');
+		this.fillElem = element.querySelector('.progress-bar-fill');
 
-/* function createCell(cell, text) {
-    var txt = document.createTextNode(text); // create text node
-    cell.appendChild(text);                   // append DIV to the table cell
+		this.setValue(initialValue);
+	}
+
+	setValue (newValue) {
+		if(newValue < 0){
+			newValue = 0;
+		}
+
+		if(newValue > 100){
+			newValue = 100;
+		}
+
+		this.value = newValue;
+		this.update();
+	}
+
+	update () {
+		const percentage = this.value + '%';
+
+		this.fillElem.style.width = percentage;
+		this.valueElem.textContent = percentage;
+	}
 }
-
-function appendColumn(tbl) {
-    // var tbl = document.getElementById('dataTable'), // table reference
-    i;
-    // open loop for each row and append cell
-    for (i = 0; i < tbl.rows.length; i++) {
-        createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i);
-    }
-} */
 
 /**
  * Función para manejar algún cambio en el input de archivos. Recibe el evento del
@@ -95,7 +104,7 @@ const createTable = (data) => {
 		if(counter < 1){
 			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
 		}
-		else{
+		else {
 			const progressBar = document.createElement('div');
 			const progressBarValue = document.createElement('div');
 			const progressBarFill = document.createElement('div');
@@ -103,12 +112,14 @@ const createTable = (data) => {
 			progressBarValue.setAttribute('class', 'progress-bar-value');
 			progressBarFill.setAttribute('class', 'progress-bar-fill');
 			
-			var porcentaje = counter.toString();
-			progressBarValue.appendChild(document.createTextNode(porcentaje + '%'));
+			const percentage = (50 + counter*3).toString();
+			progressBarValue.appendChild(document.createTextNode(percentage + '%'));
 			
+			progressBarFill.style.width = `${percentage}%`;
 			progressBar.appendChild(progressBarValue);
 			progressBar.appendChild(progressBarFill);
 
+			// new ProgressBar(document.querySelector('.progress-bar'), (50 + counter*3));
 			cell.appendChild(progressBar);
 		}
 		row.appendChild(cell);
@@ -131,6 +142,7 @@ const parseCsvContent = (rawData) => {
 	const newLinebrk = rawData.split("\n");
 	return newLinebrk.map(row => row.split(','))
 }
+
 
 /**
  * Función main que contiene toda la lógica inicial de la aplicación. hace ciertos seteos
