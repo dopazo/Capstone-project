@@ -1,32 +1,3 @@
-class ProgressBar {
-	constructor (element, initialValue=0){
-		this.valueElem = element.querySelector('.progress-bar-value');
-		this.fillElem = element.querySelector('.progress-bar-fill');
-
-		this.setValue(initialValue);
-	}
-
-	setValue (newValue) {
-		if(newValue < 0){
-			newValue = 0;
-		}
-
-		if(newValue > 100){
-			newValue = 100;
-		}
-
-		this.value = newValue;
-		this.update();
-	}
-
-	update () {
-		const percentage = this.value + '%';
-
-		this.fillElem.style.width = percentage;
-		this.valueElem.textContent = percentage;
-	}
-}
-
 /**
  * Función para manejar algún cambio en el input de archivos. Recibe el evento del
  * cambio del input, pero lo que realmente hace es sacar los archivos del input (accediendo 
@@ -119,7 +90,6 @@ const createTable = (data) => {
 			progressBar.appendChild(progressBarValue);
 			progressBar.appendChild(progressBarFill);
 
-			// new ProgressBar(document.querySelector('.progress-bar'), (50 + counter*3));
 			cell.appendChild(progressBar);
 		}
 		row.appendChild(cell);
