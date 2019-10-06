@@ -1,23 +1,3 @@
-/* 
-	Ignorar de la linea 5 a la 18. Fueron los primeros intentos
-	de agregar una columna a la tabla. Finalmente agregué "hola"
-	a cada fila en la linea 94-96. Aunque aun hay fallas
-*/
-
-/* function createCell(cell, text) {
-    var txt = document.createTextNode(text); // create text node
-    cell.appendChild(text);                   // append DIV to the table cell
-}
-
-function appendColumn(tbl) {
-    // var tbl = document.getElementById('dataTable'), // table reference
-    i;
-    // open loop for each row and append cell
-    for (i = 0; i < tbl.rows.length; i++) {
-        createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i);
-    }
-} */
-
 /**
  * Función para manejar algún cambio en el input de archivos. Recibe el evento del
  * cambio del input, pero lo que realmente hace es sacar los archivos del input (accediendo 
@@ -112,9 +92,9 @@ const createTable = (data) => {
             }
 		    percent = (Math.exp(sumProd)/(1+Math.exp(sumProd)))*100
 		    percent = Math.round(percent * 100) / 100
-		    
-		    //creación nueva columna, con porcentaje de deserción
-			const progressBar = document.createElement('div');
+      
+			//creación nueva columna, con porcentaje de deserción
+      const progressBar = document.createElement('div');
 			const progressBarValue = document.createElement('div');
 			const progressBarFill = document.createElement('div');
 			progressBar.setAttribute('class', 'progress-bar');
@@ -123,6 +103,7 @@ const createTable = (data) => {
 			
 			progressBarValue.appendChild(document.createTextNode(percent + '%'));
 			
+			progressBarFill.style.width = `${percent}%`;
 			progressBar.appendChild(progressBarValue);
 			progressBar.appendChild(progressBarFill);
 
@@ -148,6 +129,7 @@ const parseCsvContent = (rawData) => {
 	const newLinebrk = rawData.split("\n");
 	return newLinebrk.map(row => row.split(','))
 }
+
 
 /**
  * Función main que contiene toda la lógica inicial de la aplicación. hace ciertos seteos
