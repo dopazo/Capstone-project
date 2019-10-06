@@ -1,3 +1,23 @@
+/* 
+	Ignorar de la linea 5 a la 18. Fueron los primeros intentos
+	de agregar una columna a la tabla. Finalmente agregué "hola"
+	a cada fila en la linea 94-96. Aunque aun hay fallas
+*/
+
+/* function createCell(cell, text) {
+    var txt = document.createTextNode(text); // create text node
+    cell.appendChild(text);                   // append DIV to the table cell
+}
+
+function appendColumn(tbl) {
+    // var tbl = document.getElementById('dataTable'), // table reference
+    i;
+    // open loop for each row and append cell
+    for (i = 0; i < tbl.rows.length; i++) {
+        createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i);
+    }
+} */
+
 /**
  * Función para manejar algún cambio en el input de archivos. Recibe el evento del
  * cambio del input, pero lo que realmente hace es sacar los archivos del input (accediendo 
@@ -24,7 +44,7 @@ const handleCsvUpload = (event) => {
 	// sea 'text/csv'
 	// Al ocupar mac o Linux no hay problema. Simplemente descomentar esta sección
 	// del código
-	
+
 	/* const { type } = files[0]
 	if (type !== 'text/csv') {
 		$("#error-alert").toggleClass("collapse");
@@ -44,7 +64,6 @@ const handleCsvUpload = (event) => {
 	});
 
 	reader.readAsBinaryString(files[0]);
-
 	$("#loading").toggleClass("hide");
   previewDiv.classList.remove("hide");
 }
@@ -64,7 +83,7 @@ const handleCsvUpload = (event) => {
 const createTable = (data) => {
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
-
+	tableBody.setAttribute('id', 'dataTable');
 	data.forEach(function(rowData) {
 		const row = document.createElement('tr');
 		rowData.forEach(function(cellData) {
@@ -72,10 +91,12 @@ const createTable = (data) => {
 			cell.appendChild(document.createTextNode(cellData));
 			row.appendChild(cell);
 		});
-	
+		const cell = document.createElement('td');
+		cell.appendChild(document.createTextNode('hola'));
+		row.appendChild(cell);
 		tableBody.appendChild(row);
 	});
-			
+	
 	table.appendChild(tableBody);
 	return table;
 }
