@@ -96,7 +96,19 @@ const createTable = (data) => {
 			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
 		}
 		else{
-			cell.appendChild(document.createTextNode('Valor'));
+			const progressBar = document.createElement('div');
+			const progressBarValue = document.createElement('div');
+			const progressBarFill = document.createElement('div');
+			progressBar.setAttribute('class', 'progress-bar');
+			progressBarValue.setAttribute('class', 'progress-bar-value');
+			progressBarFill.setAttribute('class', 'progress-bar-fill');
+			
+			progressBarValue.appendChild(document.createTextNode('65%'));
+			
+			progressBar.appendChild(progressBarValue);
+			progressBar.appendChild(progressBarFill);
+
+			cell.appendChild(progressBar);
 		}
 		row.appendChild(cell);
 		tableBody.appendChild(row);
