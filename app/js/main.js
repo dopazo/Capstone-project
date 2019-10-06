@@ -103,7 +103,8 @@ const createTable = (data) => {
 			progressBarValue.setAttribute('class', 'progress-bar-value');
 			progressBarFill.setAttribute('class', 'progress-bar-fill');
 			
-			progressBarValue.appendChild(document.createTextNode('65%'));
+			var porcentaje = counter.toString();
+			progressBarValue.appendChild(document.createTextNode(porcentaje + '%'));
 			
 			progressBar.appendChild(progressBarValue);
 			progressBar.appendChild(progressBarFill);
