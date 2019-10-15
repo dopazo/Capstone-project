@@ -81,14 +81,14 @@ body {
 .progress-bar-fill-mid {
   height: 100%;
   width: auto;
-  background: yellow;
+  background: #ffd633;
   transition: width 0.5s;
 }
 
 .progress-bar-fill-high {
   height: 100%;
   width: auto;
-  background: red;
+  background: #e60000;
   transition: width 0.5s;
 }
 
