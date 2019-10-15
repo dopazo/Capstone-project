@@ -118,7 +118,6 @@ const createTable = (data) => {
 			}
 		row.appendChild(cell);
 		
-
 		// creación columna 'Ver Detalle'
 		const cellDetail = document.createElement('td');
 		if(counter < 1){
@@ -126,12 +125,33 @@ const createTable = (data) => {
 		}
 		else {
 			const detail = document.createElement('button');
+			detail.setAttribute('id', 'detailButton')
 			detail.setAttribute('class', 'detail');
-			detail.setAttribute
 			detail.appendChild(document.createTextNode('Ver Detalle'));
+
 			
-			detail.onclick = function() {
-				window.alert('hola');
+			
+			detail.onclick = function show() {
+				
+				var row = this.closest('tr');
+
+				var modal = document.getElementById('myModal');
+				var modalContent = document.getElementsByClassName('modalContent');
+				var span = document.getElementsByClassName('span');
+
+				var x = modalContent.querySelector('p');
+
+				x.innerHTML = row.cells.item(0) + row.cells.item(1);
+
+				span.onclick = function() {
+					modal.style.display = 'none';
+				}
+
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = 'none';
+					}
+				}
 			}
 
 			cellDetail.appendChild(detail);
@@ -159,7 +179,25 @@ const parseCsvContent = (rawData) => {
 	return newLinebrk.map(row => row.split(','))
 }
 
+const createModal = () => {
+	const modal = document.createElement('div');
+	modal.setAttribute('id', 'myModal');
+	modal.setAttribute('class', 'modal');
 
+	const modalContent = document.createElement('div');
+	modalContent.setAttribute('class', 'modalContent');
+
+	const closeModal = document.createElement('span');
+	closeModal.setAttribute('class', 'close');
+	closeModal.appendChild(document.createTextNode('&times;'));
+
+	const textContent = document.createElement('p');
+	textContent.appendChild(document.createTextNode('hola'));
+
+	modalContent.appendChild(closeModal);
+	modalContent.appendChild(textContent);
+	modal.appendChild(modalContent);
+}
 /**
  * Función main que contiene toda la lógica inicial de la aplicación. hace ciertos seteos
  * y por ahora lo que hace es bindear el input de subir archivos a una función para manejar
@@ -170,8 +208,10 @@ const parseCsvContent = (rawData) => {
  * @return {void}
  */
 const main = () => {
+	createModal();
 	const input = document.getElementById('csvUploader');
-	input.addEventListener('change', handleCsvUpload, false)
+	input.addEventListener('change', handleCsvUpload, false);
+
 }
 
 main();
