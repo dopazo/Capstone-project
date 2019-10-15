@@ -99,8 +99,15 @@ const createTable = (data) => {
 			const progressBarFill = document.createElement('div');
 			progressBar.setAttribute('class', 'progress-bar');
 			progressBarValue.setAttribute('class', 'progress-bar-value');
-			progressBarFill.setAttribute('class', 'progress-bar-fill');
-			
+			if(percent <= 25){
+				progressBarFill.setAttribute('class', 'progress-bar-fill-low');
+			}
+			else if (percent > 25 && percent <= 75){
+				progressBarFill.setAttribute('class', 'progress-bar-fill-mid')
+			}
+			else{
+				progressBarFill.setAttribute('class', 'progress-bar-fill-high')
+			}
 			progressBarValue.appendChild(document.createTextNode(percent + '%'));
 			
 			progressBarFill.style.width = `${percent}%`;
