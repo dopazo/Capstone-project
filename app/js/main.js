@@ -136,6 +136,7 @@ const createTable = (data) => {
 
 			cellDetail.appendChild(detail);
 		}
+		cellDetail.style.textAlign = 'center';
 		row.appendChild(cellDetail);
 
 		tableBody.appendChild(row);

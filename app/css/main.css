@@ -10,15 +10,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* .body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to top, #4F6072, #8699AA);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* //upload component */
 
 .logo {
   display: inline-block;
@@ -26,6 +17,7 @@ body {
   margin-right: auto;
   padding-bottom: 0;
 }
+
 .upload {
   position: relative;
   width: auto;
@@ -44,6 +36,7 @@ body {
   opacity: 0;
   text-align: center;
 }
+
 .input {
   display: block;
   margin-left: auto;
@@ -106,6 +99,23 @@ body {
 .tableBody {
   overflow-x: auto;
   white-space: nowrap;
+}
+
+.detail {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 /* .upload-files {
     header {
