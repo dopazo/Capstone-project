@@ -64,6 +64,7 @@ const createTable = (data) => {
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
 	var counter = 0;
+	let h = 0;
 	data.forEach(function(rowData) {
 		const row = document.createElement('tr');
 		rowData.forEach(function(cellData) {
@@ -78,6 +79,8 @@ const createTable = (data) => {
                 -0.003,  //Rank             row[5]
                 -0.0025];//NEM(coef PsuOpc) row[6]
         
+		if (row.cells.length < coefs.length+3) {
+		} else {
 		const cell = document.createElement('td');
 		if(counter < 1){
 			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
@@ -85,16 +88,17 @@ const createTable = (data) => {
 		else{
 		    //Calculo modelo regresión logistica: suma producto, exponencial y round
 		    var sumProd = 0;
-            for(var i=0; i< coefs.length; i++) {
+            for(let i=0; i< coefs.length; i++) {
                 //TODO: seleccionar columnas por el nombre de la columna
                 //TODO: Modificar nombres de columnas y sus valores de ser necesario
+                
                 sumProd += coefs[i]*row.cells.item(i+3).innerText//*row[i+3];
             }
 		    percent = (Math.exp(sumProd)/(1+Math.exp(sumProd)))*100
 		    percent = Math.round(percent * 100) / 100
       
 			//creación nueva columna, con porcentaje de deserción
-      const progressBar = document.createElement('div');
+            const progressBar = document.createElement('div');
 			const progressBarValue = document.createElement('div');
 			const progressBarFill = document.createElement('div');
 			progressBar.setAttribute('class', 'progress-bar');
@@ -111,6 +115,7 @@ const createTable = (data) => {
 		}
 		row.appendChild(cell);
 		tableBody.appendChild(row);
+		}
 		counter++;
 	});
 	
