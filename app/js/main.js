@@ -120,7 +120,7 @@ const createTable = (data) => {
 		tableBody.appendChild(row);
 		counter++;
 	});
-	
+	tableBody.setAttribute('class', 'tableBody');
 	table.appendChild(tableBody);
 	return table;
 }
