@@ -79,11 +79,11 @@ const createTable = (data) => {
                 -0.0025];//NEM(coef PsuOpc) row[6]
         
 		const cell = document.createElement('td');
-		if(counter < 1){
+		if(counter < 1) {
 			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
-		}
-		else{
-		    //Calculo modelo regresión logistica: suma producto, exponencial y round
+			}
+		else {
+			//Calculo modelo regresión logistica: suma producto, exponencial y round
 		    var sumProd = 0;
             for(var i=0; i< coefs.length; i++) {
                 //TODO: seleccionar columnas por el nombre de la columna
@@ -94,18 +94,18 @@ const createTable = (data) => {
 		    percent = Math.round(percent * 100) / 100
       
 			//creación nueva columna, con porcentaje de deserción
-      const progressBar = document.createElement('div');
+			const progressBar = document.createElement('div');
 			const progressBarValue = document.createElement('div');
 			const progressBarFill = document.createElement('div');
 			progressBar.setAttribute('class', 'progress-bar');
 			progressBarValue.setAttribute('class', 'progress-bar-value');
-			if(percent <= 25){
+			if(percent <= 25) {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-low');
 			}
-			else if (percent > 25 && percent <= 75){
+			else if (percent > 25 && percent <= 75) {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-mid')
 			}
-			else{
+			else {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-high')
 			}
 			progressBarValue.appendChild(document.createTextNode(percent + '%'));
@@ -115,8 +115,24 @@ const createTable = (data) => {
 			progressBar.appendChild(progressBarFill);
 
 			cell.appendChild(progressBar);
-		}
+			}
 		row.appendChild(cell);
+		
+
+		// creación columna 'Ver Detalle'
+		const cellDetail = document.createElement('td');
+		if(counter < 1){
+			cellDetail.appendChild(document.createTextNode('Detalle'));
+		}
+		else {
+			const detail = document.createElement('div');
+			detail.setAttribute('class', 'detail');
+			detail.appendChild(document.createTextNode('Ver Detalle'));
+
+			cellDetail.appendChild(detail);
+		}
+		row.appendChild(cellDetail);
+
 		tableBody.appendChild(row);
 		counter++;
 	});
