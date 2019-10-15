@@ -125,9 +125,14 @@ const createTable = (data) => {
 			cellDetail.appendChild(document.createTextNode('Detalle'));
 		}
 		else {
-			const detail = document.createElement('div');
+			const detail = document.createElement('button');
 			detail.setAttribute('class', 'detail');
+			detail.setAttribute
 			detail.appendChild(document.createTextNode('Ver Detalle'));
+			
+			detail.onclick = function() {
+				window.alert('hola');
+			}
 
 			cellDetail.appendChild(detail);
 		}
