@@ -134,8 +134,8 @@ const createTable = (data) => {
 			detail.onclick = function show() {
 				
 				var row = this.closest('tr');
-
-				var modal = document.getElementById('myModal');
+				alert('Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML);
+				/* var modal = document.getElementById('myModal');
 				var modalContent = document.getElementsByClassName('modalContent');
 				var span = document.getElementsByClassName('span');
 
@@ -151,7 +151,7 @@ const createTable = (data) => {
 					if (event.target == modal) {
 						modal.style.display = 'none';
 					}
-				}
+				} */
 			}
 
 			cellDetail.appendChild(detail);
