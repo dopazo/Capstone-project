@@ -137,7 +137,7 @@ const createTable = (data) => {
 				/* alert('Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML); */
 				var modal = document.getElementById('myModal');
 				
-				var span = document.getElementsByClassName('close');
+				var span = document.getElementsByClassName('close')[0];
 
 				var content = modal.querySelector('p');
 
