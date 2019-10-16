@@ -1,5 +1,5 @@
-﻿Nombre,Apellido,Edad,PSU MAT,PSU LEN,RANKING,NEM
-Rodrigo,Martinez,21,100,800,615,100
-Benjamin,Mery,21,250,700,680,400
-Diego,Opazo,22,705,720,725,750
-Barbara,Salazar,22,709,710,723,730
+﻿Nombre,Apellido,Edad,PSU MAT,PSU LEN,RANKING,NEM,correo
+Rodrigo,Martinez,21,100,800,615,100,rodrimartinez@alumnos.uai.cl
+Benjamin,Mery,21,250,700,680,400,hola
+Diego,Opazo,22,705,720,725,750,chao
+Barbara,Salazar,22,709,710,723,730,jiji
