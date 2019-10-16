@@ -142,7 +142,13 @@ const createTable = (data) => {
 				var content = modal.querySelector('p');
 
 				content.innerHTML = '<h1><b>Información</b></h1><br>' +
-									'<ul> <li> Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML + '</li><li> Edad: ' + row.cells.item(2).innerHTML + '</li><li> PSU Matemática: ' + row.cells.item(3).innerHTML + '</li><li> PSU Lenguaje: ' + row.cells.item(4).innerHTML + '</li><li> Puntaje Rankink: ' + row.cells.item(5).innerHTML + '</li><li> Puntaje NEM: ' + row.cells.item(6).innerHTML + '</li><li>Correo: ' + row.cells.item(7).innerHTML + '</li></ul>';
+									'<ul> <li> Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML +
+									'</li><li> Edad: ' + row.cells.item(2).innerHTML +
+									'</li><li> PSU Matemática: ' + row.cells.item(3).innerHTML +
+									'</li><li> PSU Lenguaje: ' + row.cells.item(4).innerHTML +
+									'</li><li> Puntaje Rankink: ' + row.cells.item(5).innerHTML +
+									'</li><li> Puntaje NEM: ' + row.cells.item(6).innerHTML +
+									'</li><li>Correo: ' + row.cells.item(7).innerHTML + '</li></ul>';
 				content.style.textAlign = 'left';
 
 				modal.style.display = 'block';
