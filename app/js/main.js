@@ -134,14 +134,16 @@ const createTable = (data) => {
 			detail.onclick = function show() {
 				
 				var row = this.closest('tr');
-				alert('Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML);
-				/* var modal = document.getElementById('myModal');
-				var modalContent = document.getElementsByClassName('modalContent');
-				var span = document.getElementsByClassName('span');
+				/* alert('Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML); */
+				var modal = document.getElementById('myModal');
+				
+				var span = document.getElementsByClassName('close');
 
-				var x = modalContent.querySelector('p');
+				var content = modal.querySelector('p');
 
-				x.innerHTML = row.cells.item(0) + row.cells.item(1);
+				content.innerHTML = 'Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML;
+
+				modal.style.display = 'block';
 
 				span.onclick = function() {
 					modal.style.display = 'none';
@@ -151,7 +153,7 @@ const createTable = (data) => {
 					if (event.target == modal) {
 						modal.style.display = 'none';
 					}
-				} */
+				}
 			}
 
 			cellDetail.appendChild(detail);
