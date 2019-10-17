@@ -11,6 +11,7 @@ body {
   align-items: center;
 }
 
+
 .logo {
   display: inline-block;
   margin-left: auto;
@@ -159,7 +160,7 @@ body {
   border-color: #285e8e;
   display: inline-block;
   padding: 6px 12px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
   text-align: center;
@@ -168,7 +169,6 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
-  float: right;
 }
 
 /* .upload-files {
