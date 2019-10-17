@@ -147,11 +147,30 @@ body {
 }
 
 .close:hover,
-.close:focus{
+.close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
+
+.mailButton {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  float: right;
+}
+
 /* .upload-files {
     header {
       background: $skin;

@@ -148,7 +148,7 @@ const createTable = (data) => {
 									'</li><li> PSU Lenguaje: ' + row.cells.item(4).innerHTML +
 									'</li><li> Puntaje Rankink: ' + row.cells.item(5).innerHTML +
 									'</li><li> Puntaje NEM: ' + row.cells.item(6).innerHTML +
-									'</li><li><a href="mailto:' + row.cells.item(7).innerHTML + '">Enviar Mail</a></li></ul>';
+									'</li></ul><a class="mailButton" href="mailto:' + row.cells.item(7).innerHTML + '">Contactar</a>';
 				content.style.textAlign = 'left';
 
 				modal.style.display = 'block';
