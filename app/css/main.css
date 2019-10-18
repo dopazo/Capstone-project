@@ -69,21 +69,18 @@ body {
   height: 100%;
   width: auto;
   background: #4CAF50;
-  transition: width 0.5s;
 }
 
 .progress-bar-fill-mid {
   height: 100%;
   width: auto;
   background: #ffd633;
-  transition: width 0.5s;
 }
 
 .progress-bar-fill-high {
   height: 100%;
   width: auto;
   background: #e60000;
-  transition: width 0.5s;
 }
 
 .progress-bar-value {
@@ -169,8 +166,14 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
+  transition: all 0.3s ease 0s;
 }
 
+.mailButton:hover {
+  color: #182235;
+  background-color: #7899b6;
+  transition: all 0.3s ease 0s;
+}
 /* .upload-files {
     header {
       background: $skin;
