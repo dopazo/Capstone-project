@@ -79,11 +79,11 @@ const createTable = (data) => {
                 -0.0025];//NEM(coef PsuOpc) row[6]
         
 		const cell = document.createElement('td');
-		if(counter < 1){
+		if(counter < 1) {
 			cell.appendChild(document.createTextNode('Porcentaje Deserción'));
-		}
-		else{
-		    //Calculo modelo regresión logistica: suma producto, exponencial y round
+			}
+		else {
+			//Calculo modelo regresión logistica: suma producto, exponencial y round
 		    var sumProd = 0;
             for(var i=0; i< coefs.length; i++) {
                 //TODO: seleccionar columnas por el nombre de la columna
@@ -94,18 +94,18 @@ const createTable = (data) => {
 		    percent = Math.round(percent * 100) / 100
       
 			//creación nueva columna, con porcentaje de deserción
-      const progressBar = document.createElement('div');
+			const progressBar = document.createElement('div');
 			const progressBarValue = document.createElement('div');
 			const progressBarFill = document.createElement('div');
 			progressBar.setAttribute('class', 'progress-bar');
 			progressBarValue.setAttribute('class', 'progress-bar-value');
-			if(percent <= 25){
+			if(percent <= 25) {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-low');
 			}
-			else if (percent > 25 && percent <= 75){
+			else if (percent > 25 && percent <= 75) {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-mid')
 			}
-			else{
+			else {
 				progressBarFill.setAttribute('class', 'progress-bar-fill-high')
 			}
 			progressBarValue.appendChild(document.createTextNode(percent + '%'));
@@ -115,8 +115,60 @@ const createTable = (data) => {
 			progressBar.appendChild(progressBarFill);
 
 			cell.appendChild(progressBar);
-		}
+			}
 		row.appendChild(cell);
+		
+		// creación columna 'Ver Detalle'
+		const cellDetail = document.createElement('td');
+		if(counter < 1){
+			cellDetail.appendChild(document.createTextNode('Detalle'));
+		}
+		else {
+			const detail = document.createElement('button');
+			detail.setAttribute('id', 'detailButton')
+			detail.setAttribute('class', 'detail');
+			detail.appendChild(document.createTextNode('Ver Detalle'));
+
+			
+			
+			detail.onclick = function show() {
+				
+				var row = this.closest('tr');
+				/* alert('Nombre: ' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML); */
+				var modal = document.getElementById('myModal');
+				
+				var span = document.getElementsByClassName('close')[0];
+
+				var content = modal.querySelector('p');
+
+				content.innerHTML = '<h1><b>' + row.cells.item(0).innerHTML + ' ' + row.cells.item(1).innerHTML + '</b></h1><br>' +
+									'<ul><h4>Información: </h4>' +
+									'</li><li> Edad: ' + row.cells.item(2).innerHTML +
+									'</li><li> PSU Matemática: ' + row.cells.item(3).innerHTML +
+									'</li><li> PSU Lenguaje: ' + row.cells.item(4).innerHTML +
+									'</li><li> Puntaje Rankink: ' + row.cells.item(5).innerHTML +
+									'</li><li> Puntaje NEM: ' + row.cells.item(6).innerHTML +
+									'</li></ul><a class="mailButton" href="mailto:' + row.cells.item(7).innerHTML + '">Contactar</a>';
+				content.style.textAlign = 'left';
+
+				modal.style.display = 'block';
+
+				span.onclick = function() {
+					modal.style.display = 'none';
+				}
+
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = 'none';
+					}
+				}
+			}
+
+			cellDetail.appendChild(detail);
+		}
+		cellDetail.style.textAlign = 'center';
+		row.appendChild(cellDetail);
+
 		tableBody.appendChild(row);
 		counter++;
 	});
@@ -137,7 +189,25 @@ const parseCsvContent = (rawData) => {
 	return newLinebrk.map(row => row.split(','))
 }
 
+const createModal = () => {
+	const modal = document.createElement('div');
+	modal.setAttribute('id', 'myModal');
+	modal.setAttribute('class', 'modal');
 
+	const modalContent = document.createElement('div');
+	modalContent.setAttribute('class', 'modalContent');
+
+	const closeModal = document.createElement('span');
+	closeModal.setAttribute('class', 'close');
+	closeModal.appendChild(document.createTextNode('&times;'));
+
+	const textContent = document.createElement('p');
+	textContent.appendChild(document.createTextNode('hola'));
+
+	modalContent.appendChild(closeModal);
+	modalContent.appendChild(textContent);
+	modal.appendChild(modalContent);
+}
 /**
  * Función main que contiene toda la lógica inicial de la aplicación. hace ciertos seteos
  * y por ahora lo que hace es bindear el input de subir archivos a una función para manejar
@@ -148,8 +218,10 @@ const parseCsvContent = (rawData) => {
  * @return {void}
  */
 const main = () => {
+	createModal();
 	const input = document.getElementById('csvUploader');
-	input.addEventListener('change', handleCsvUpload, false)
+	input.addEventListener('change', handleCsvUpload, false);
+
 }
 
 main();
