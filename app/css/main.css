@@ -114,6 +114,13 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
+  transition: all 0.3s ease 0s;
+}
+
+.detail:hover {
+  color: #182235;
+  background-color: #7899b6;
+  transition: all 0.3s ease 0s;
 }
 
 .modal {
