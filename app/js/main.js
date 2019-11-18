@@ -168,7 +168,13 @@ const createTable = (data) => {
 		}
 		cellDetail.style.textAlign = 'center';
 		row.appendChild(cellDetail);
-
+		if (counter < 1) {
+			var i;
+			tableHeaders = row.cells;
+			for (i=2; i<tableHeaders.length; i++) {
+				tableHeaders[i].setAttribute('onclick', 'sortTableBy('+ i + ')');
+			}
+		}
 		tableBody.appendChild(row);
 		counter++;
 	});
@@ -177,7 +183,7 @@ const createTable = (data) => {
 	return table;
 }
 
-const sortTableBy = () => {
+const sortTableBy = (n) => {
 	var table, rows, switching, i, x, y, shouldSwitch;
 	table = document.getElementsByClassName('tableBody')[0];
 	switching = true;
@@ -189,8 +195,8 @@ const sortTableBy = () => {
 		for(i=1; i<(rows.length - 1); i++) {
 			shouldSwitch = false;
 
-			x = rows[i].getElementsByTagName('TD')[5]; // NEM
-			y = rows[i+1].getElementsByTagName('TD')[5];
+			x = rows[i].getElementsByTagName('TD')[n]; // NEM
+			y = rows[i+1].getElementsByTagName('TD')[n];
 
 			if(Number(x.innerHTML) < Number(y.innerHTML)) {
 				shouldSwitch = true;
