@@ -168,13 +168,75 @@ const createTable = (data) => {
 		}
 		cellDetail.style.textAlign = 'center';
 		row.appendChild(cellDetail);
-
+		if (counter < 1) {
+			var i;
+			tableHeaders = row.cells;
+			for (i=2; i<tableHeaders.length; i++) {
+				tableHeaders[i].setAttribute('onclick', 'sortTableBy('+ i + ')');
+			}
+		}
 		tableBody.appendChild(row);
 		counter++;
 	});
 	tableBody.setAttribute('class', 'tableBody');
 	table.appendChild(tableBody);
 	return table;
+}
+
+const sortTableBy = (n) => {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	table = document.getElementsByClassName('tableBody')[0];
+	switching = true;
+
+	dir = 'asc'
+	while(switching) {
+		switching = false;
+		rows = table.rows;
+
+		for(i=1; i<(rows.length - 1); i++) {
+			shouldSwitch = false;
+
+			x = rows[i].getElementsByTagName('TD')[n];
+			y = rows[i+1].getElementsByTagName('TD')[n];
+
+			if(n == 8){
+				if(dir == 'asc') {
+					if(Number(parseFloat(x.querySelector('.progress-bar-value').innerHTML)) > Number(parseFloat(y.querySelector('.progress-bar-value').innerHTML))) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == 'desc') {
+					if(Number(parseFloat(x.querySelector('.progress-bar-value').innerHTML)) < Number(parseFloat(y.querySelector('.progress-bar-value').innerHTML))) {
+						shouldSwitch = true;
+						break;
+					}
+				}
+			} else {
+				if(dir == 'asc') {
+					if(Number(x.innerHTML) > Number(y.innerHTML)) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == 'desc') {
+					if(Number(x.innerHTML) < Number(y.innerHTML)) {
+						shouldSwitch = true;
+						break;
+					}
+				}
+			}
+		}
+	if(shouldSwitch) {
+		rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+		switching = true;
+
+		switchcount++;
+		} else {
+			if(switchcount == 0 && dir == 'asc') {
+				dir = 'desc';
+				switching = true;
+			}
+		}
+	}
 }
 
 /**
