@@ -196,21 +196,34 @@ const sortTableBy = (n) => {
 		for(i=1; i<(rows.length - 1); i++) {
 			shouldSwitch = false;
 
-			x = rows[i].getElementsByTagName('TD')[n]; // NEM
+			x = rows[i].getElementsByTagName('TD')[n];
 			y = rows[i+1].getElementsByTagName('TD')[n];
 
-			if(dir == 'asc') {
-				if(Number(x.innerHTML) > Number(y.innerHTML)) {
-					shouldSwitch = true;
-					break;
+			if(n == 8){
+				if(dir == 'asc') {
+					if(Number(parseFloat(x.querySelector('.progress-bar-value').innerHTML)) > Number(parseFloat(y.querySelector('.progress-bar-value').innerHTML))) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == 'desc') {
+					if(Number(parseFloat(x.querySelector('.progress-bar-value').innerHTML)) < Number(parseFloat(y.querySelector('.progress-bar-value').innerHTML))) {
+						shouldSwitch = true;
+						break;
+					}
 				}
-			} else if (dir == 'desc') {
-				if(Number(x.innerHTML) < Number(y.innerHTML)) {
-					shouldSwitch = true;
-					break;
+			} else {
+				if(dir == 'asc') {
+					if(Number(x.innerHTML) > Number(y.innerHTML)) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == 'desc') {
+					if(Number(x.innerHTML) < Number(y.innerHTML)) {
+						shouldSwitch = true;
+						break;
+					}
 				}
 			}
-			
 		}
 	if(shouldSwitch) {
 		rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
