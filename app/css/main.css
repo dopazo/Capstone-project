@@ -57,10 +57,6 @@ body {
   display: none;
 }
 
-.sortButton {
-  display: block;
-}
-
 .progress-bar {
   position: relative;
   background: transparent !important;

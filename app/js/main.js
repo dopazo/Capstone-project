@@ -184,10 +184,11 @@ const createTable = (data) => {
 }
 
 const sortTableBy = (n) => {
-	var table, rows, switching, i, x, y, shouldSwitch;
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 	table = document.getElementsByClassName('tableBody')[0];
 	switching = true;
 
+	dir = 'asc'
 	while(switching) {
 		switching = false;
 		rows = table.rows;
@@ -198,15 +199,30 @@ const sortTableBy = (n) => {
 			x = rows[i].getElementsByTagName('TD')[n]; // NEM
 			y = rows[i+1].getElementsByTagName('TD')[n];
 
-			if(Number(x.innerHTML) < Number(y.innerHTML)) {
-				shouldSwitch = true;
-				break;
+			if(dir == 'asc') {
+				if(Number(x.innerHTML) > Number(y.innerHTML)) {
+					shouldSwitch = true;
+					break;
+				}
+			} else if (dir == 'desc') {
+				if(Number(x.innerHTML) < Number(y.innerHTML)) {
+					shouldSwitch = true;
+					break;
+				}
 			}
+			
 		}
 	if(shouldSwitch) {
 		rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
 		switching = true;
-	}
+
+		switchcount++;
+		} else {
+			if(switchcount == 0 && dir == 'asc') {
+				dir = 'desc';
+				switching = true;
+			}
+		}
 	}
 }
 
